@@ -1,6 +1,10 @@
-use std::path::PathBuf;
+use std::{env, path::PathBuf};
 
 fn main() {
+    if env::var("DOCS_RS").is_ok() {
+        return;
+    }
+    
     println!("cargo:rustc-link-lib=rocm_smi64");
 
     let bindings = bindgen::Builder::default()
